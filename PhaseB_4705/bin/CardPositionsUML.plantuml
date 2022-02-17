@@ -1,0 +1,135 @@
+@startuml Class_Diagram_UML
+skinparam style strictuml
+skinparam DefaultFontName Arial
+skinparam DefaultFontSize 16
+skinparam DefaultFontStyle bold
+skinparam ArrowThickness 2.2
+skinparam ArrowColor #red
+hide empty members
+
+
+package CardPositions
+{
+    abstract class CardPosition
+    {
+        -icon : String
+
+        -position : int
+        -day : String
+
+        'association with Controller
+        CardPosition(imageName : String, controller : Controller)
+
+        +GetPosition() : int
+        +GetDay() : String
+        +GetIcon() : String
+        +GetController() : Controller
+
+        +SetPosition(position : int) : void
+        +SetDay(day : int) : void
+        +SetIcon(icon : String) : void
+        +SetController(controller : Controller) : void
+
+        +{abstract}performAction(Player player):void 
+    }
+    CardPosition -- Controller.Controller
+    CardPosition -- Model.Player
+
+
+    class DealPosition extends CardPosition
+    {
+        +DealPosition(imageName : String, controller : Controller)
+        +performAction(player : Player) : void
+        +toString() : String
+    }
+
+    class Sweeptakes extends CardPosition
+    {
+        +SweepTakes(imageName : String, controller : Controller)
+        +performAction(player : Player) : void
+        +toString() : String
+    }
+
+    class Lottery extends CardPosition
+    {
+        +Lottery(imageName : String, controller : Controller)
+        +performAction(player : Player) : void
+        -RollUntilPicked(opt:int[],player:Player):int
+        -PlayerOption(player:Player):int
+        -PickWinner(opt:int[], roll:int, player:Player):void
+        +toString() : String
+    }
+
+    abstract class MailPosition extends CardPosition
+    {    
+        MailPosition(imageName : String, controller : Controller)
+    }
+
+    class OneMailPosition extends MailPosition
+    {
+        +OneMailPosition(imageName : String, controller : Controller)
+        +performAction(player : Player) : void
+        +toString() : String
+    }
+
+    class TwoMailPosition extends MailPosition
+    {
+        +TwoMailPosition(imageName : String, controller : Controller)
+        +performAction(player : Player) : void
+        +toString() : String
+    }
+
+    class RadioContest extends CardPosition
+    {
+        +RadioContest(imageName : String, controller : Controller)
+        +performAction(player : Player) : void
+        +toString() : String
+    }
+
+    class BuyerPosition extends CardPosition
+    {
+        +BuyerPosition(imageName : String, controller : Controller)
+        +performAction(player : Player) : void
+        +toString() : String
+    }
+
+    class CasinoNight extends CardPosition
+    {
+        +CasinoNight(imageName : String, controller : Controller)
+        +performAction(player : Player) : void
+        +toString() : String
+    }
+
+    class YardSale extends CardPosition
+    {
+        +YardSale(imageName : String, controller : Controller)
+        +performAction(player : Player) : void
+        +toString() : String
+    }
+
+    class PayDayPosition extends CardPosition
+    {
+        +PayDayPosition(imageName : String, controller : Controller)
+        +performAction(player : Player) : void
+        +toString() : String
+    }
+
+    class StartPosition extends CardPosition
+    {
+        +StartPosition(imageName : String)
+        +performAction(player : Player) : void
+        +toString() : String
+    }
+
+    class JackpotPosition extends CardPosition
+    {
+        -jackpot : float
+
+        +JackpotPosition(imageName : String)
+        +performAction(player : Player) : void
+        +GetJackpot() : float
+        +SetJackpot(jackpot : float) : void
+    }
+}
+
+@enduml
